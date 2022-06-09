@@ -1,0 +1,24 @@
+<%# include the header.ejs layout for the header %>
+<%- include('partials/header'); -%>
+
+<h1>Compose</h1>
+
+<form class="" action="/compose" method="post">
+
+  <div class="mb-3">
+    <label for="formGroup" class="form-label">Title</label>
+    <input type="text" class="form-control" id="formGroup" name="postTitle">
+  </div>
+
+  <div class="mb-3">
+    <label for="formText" class="form-label">Post</label>
+    <textarea class="form-control" id="formText" rows="5" style="height:100%;" name="postBody"></textarea>
+  </div>
+
+  <div class="mb-3">
+    <button class="btn btn-primary" type="submit" name="submit">Publish</button>
+  </div
+</form>
+
+<%# include the header.ejs layout for the header %>
+<%- include('partials/footer'); -%>
