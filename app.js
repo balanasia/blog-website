@@ -18,6 +18,9 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
+
+// ******* GET PARAMETERS *******
+
 //route for the home page
 //rednering the home page text
 app.get("/", function(req, res){
@@ -42,6 +45,22 @@ app.get("/compose", function(req, res){
   res.render("compose");
 });
 
+app.get("/posts/:postName", function(req, res){
+  const requestedTitle = req.params.postName;
+
+  posts.forEach(function(post){
+    const storedTitle = post.title
+
+    if(requestedTitle === storedTitle){
+      console.log("Match Found");
+    } else {
+      console.log("No Match Found :c");
+    }
+  });
+});
+
+// ******* POST PARAMETERS ********
+
 app.post("/compose", function(req, res){
   const post = {
     title: req.body.postTitle,
@@ -52,6 +71,7 @@ app.post("/compose", function(req, res){
 
 });
 
+// ******* LISTEN PARAMETERS ***********
 
 //listening on the port 3000
 //for the app
