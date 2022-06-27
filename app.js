@@ -71,6 +71,21 @@ app.get("/posts/:postName", function(req, res){
 
 });
 
+app.get('/:postId', (req, res) => {
+  const requestedId = req.params.postId;
+
+  //handling the error for favicon being added as a post
+  if (requestedId == "favicon.ico") return;
+
+  Post.findById(requestedId, (err, post) => {
+    console.log(requestedId);
+    // res.render('post', {
+    //   title: post.title,
+    //   content: post.content
+    // })
+  })
+})
+
 app.get("/about", function(req, res){
   res.render("about", {aboutContent: aboutContent});
 });
