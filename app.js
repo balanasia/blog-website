@@ -55,19 +55,20 @@ app.post("/compose", function(req, res){
 
 });
 
-app.get("/posts/:postName", function(req, res){
-  const requestedTitle = _.lowerCase(req.params.postName);
+app.get("/posts/:postId", function(req, res){
 
-  posts.forEach(function(post){
-    const storedTitle = _.lowerCase(post.title);
+  const requestedId = req.params.postId;
 
-    if (storedTitle === requestedTitle) {
-      res.render("post", {
-        title: post.title,
-        content: post.content
-      });
-    }
-  });
+  //handling the error for favicon being added as a post
+  if (requestedId == "favicon.ico") return;
+
+  Post.findById(requestedId, (err, post) => {
+    res.render('post', {
+      title: post.title,
+      content: post.content
+    })
+  })
+
 
 });
 
@@ -78,13 +79,12 @@ app.get('/:postId', (req, res) => {
   if (requestedId == "favicon.ico") return;
 
   Post.findById(requestedId, (err, post) => {
-    console.log(requestedId);
-    // res.render('post', {
-    //   title: post.title,
-    //   content: post.content
-    // })
+    res.render('post', {
+      title: post.title,
+      content: post.content
+    })
   })
-})
+});
 
 app.get("/about", function(req, res){
   res.render("about", {aboutContent: aboutContent});
